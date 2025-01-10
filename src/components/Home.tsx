@@ -8,7 +8,7 @@ export default function HomeScreen() {
   return (
     <FlatList
       data={Data}
-      keyExtractor={(item) => item.id.toString()} 
+      keyExtractor={(item) => item.productId.toString()} 
       renderItem={({ item }) => (
         <Card name={item.name} price={item.price} image={item.image} />
       )}

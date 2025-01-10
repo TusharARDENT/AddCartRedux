@@ -1,21 +1,23 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './components/Home';
-import DetailsScreen from './components/Details';
-import { Alert } from 'react-native';
+import HomeScreen from './src/components/Home';
+import DetailsScreen from './src/components/Details';
 import { useNavigation } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import store from './store';
-import Counter from './slices//counterSlice'; // Your component that uses Redux
+import { store } from './src/redux/store';
+import Home from './src/components/Home';
+import { RootState, AppDispatch } from './src/redux/store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 function RootStack() {
+  const count = useSelector((state: RootState) => state.counter.count);
+  // const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation();
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -26,7 +28,7 @@ function RootStack() {
           // eslint-disable-next-line react/no-unstable-nested-components
           headerRight: () => (
             <Button onPress={() => navigation.navigate('Details')}>
-                🛒 {'x 0'}
+                🛒 {count}
               </Button>
           ),
         }}
@@ -39,8 +41,10 @@ function RootStack() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <Provider store={store}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+    </Provider>
   );
 }
