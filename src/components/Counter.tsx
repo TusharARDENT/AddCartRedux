@@ -3,12 +3,10 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../redux/slices/counterSlice';
-import { RootState, AppDispatch } from '../redux/store'; // Import the store types
+import { RootState, AppDispatch } from '../redux/store';
 import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
 const Counter: React.FC = () => {
-  // Access the count value from the Redux store with useSelector
   const count = useSelector((state: RootState) => state.counter.count);
-  // Get the dispatch function from the Redux store
   const dispatch = useDispatch<AppDispatch>();
 
   return (

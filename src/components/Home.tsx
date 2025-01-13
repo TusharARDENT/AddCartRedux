@@ -1,22 +1,41 @@
 import React from 'react';
-import { View, Text, Image, FlatList } from 'react-native';
-import { Button } from '@react-navigation/elements';
+import { FlatList } from 'react-native';
 import Card from './common/Card';
-import { Data } from './data/data';
+import { useState, useEffect } from 'react';
 
-export default function HomeScreen() {
+export default function Home() {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  async function fetchData() {
+     try {
+        const response = await fetch('https://dummyjson.com/products');
+        const result = await response.json();
+        setData(result.products);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <FlatList
-      data={Data}
-      keyExtractor={(item) => item.productId.toString()} 
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      numColumns={2}
       renderItem={({ item }) => (
-        <Card name={item.name} price={item.price} image={item.image} />
+        <Card name={item.title} price={item.price} image={item.images[0]} productId={(item.id).toString()} />
       )}
+      // eslint-disable-next-line react-native/no-inline-styles
       contentContainerStyle={{
-    paddingHorizontal: 10, // Add padding to the left and right
-    paddingBottom: 20, // Add padding to the bottom
-    marginTop: 10,
-  }}
+      paddingHorizontal: 6,
+      paddingBottom: 20,
+      marginTop: 10,
+      }}
     />
   );
 }

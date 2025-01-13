@@ -1,25 +1,38 @@
 import React from "react";
 import { View,Text, FlatList } from "react-native";
-import Card from "./common/Card";
-import { Data } from "./data/data";
 import CheckoutItem from "./common/CheckoutItem";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import CheckoutHeader from "./common/CheckoutHeader";
+import ChekoutFooter from "./common/ChekoutFooter";
 export default 
-function DetailsScreen() {
-    const data = Data;
+  function DetailsScreen() {
+    const cartProducts = useSelector((state: RootState) => state.cart.productArray);
+    console.log(cartProducts)
   return (
       <FlatList 
-      data = {data}
-      keyExtractor={item => item.id}
+      data = {cartProducts}
+      keyExtractor={item => item.productId}
+      ListHeaderComponent={<CheckoutHeader/>}
+      ListFooterComponent={<ChekoutFooter />}
+      ListEmptyComponent={
+          <View style={{ padding: 20, alignItems: 'center' }}>
+            <Text style={{ fontSize: 18, color: '#999' }}>Your cart is empty</Text>
+          </View>
+      }
       renderItem={({item}) => {
                           return(
                         <CheckoutItem
                           name = {item.name}
                           price = {item.price}
-                          image = {item.image}
+                          image={item.image}
+                          productId={item.productId}
+                          quantity={item.quantity}
                           />
                           )
                       }}
                       contentContainerStyle = {{justifyContent:'center', alignItems:'center'}}
+
       />
   );
 }
