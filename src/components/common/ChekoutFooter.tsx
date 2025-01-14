@@ -16,8 +16,10 @@ const CheckoutFooter = () => {
     const totalPrice = cartProducts.reduce((total: number, product: { price: number; quantity: number; }) => total + (product.price * product.quantity), 0);
 
     const handleClearList = () =>{ 
-        dispatch(clearCart());
-        navigation.navigate(SuccessPage)
+        setTimeout(() => {
+            dispatch(clearCart());
+        },1000)
+        navigation.navigate(SuccessPage);
     };
     return (
         <View style={{justifyContent:'flex-end', flexDirection:'row'}}>

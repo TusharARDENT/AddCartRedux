@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image, BackHandler } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, BackHandler, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Home from './Home';
 const SuccessPage = () => {
@@ -30,7 +30,9 @@ const SuccessPage = () => {
         resizeMode="contain"
       />
       <Text style={styles.description}>Your action was completed successfully.</Text>
-      <Button title="Shop More" onPress={handleGoBack}/>
+      <TouchableOpacity onPress={handleGoBack} >
+        <Text style={styles.shopMoreBtn}>Shop More</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -50,15 +52,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   description: {
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight : 700,
     textAlign: 'center',
+    padding : 20,
+    borderRadius : 10,
     marginBottom: 20,
+    color : '#A79277',
   },
   gif: {
     width: 200,
     height: 200,
     marginBottom: 20,
   },
+  shopMoreBtn : {
+    fontSize : 20,
+    fontWeight : 700,
+    backgroundColor : '#E2F4C5',
+    padding : 20,
+    borderRadius : 10,
+  }
 });
 
 export default SuccessPage;

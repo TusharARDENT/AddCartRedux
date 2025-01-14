@@ -45,9 +45,10 @@ const styles = StyleSheet.create({
         color : 'white',
     },
     quantityStyle :{
-        width : width / 5,
+        width : width / 6,
         fontSize : 16,
         fontWeight : 800,
         color : 'white',
+        textAlign : 'right',
     },
 })
