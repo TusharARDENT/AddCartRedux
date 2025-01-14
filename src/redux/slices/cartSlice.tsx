@@ -16,6 +16,24 @@ const initialState: CartState = {
   productArray: [],
 };
 
+const saveCartToStorage = async (productArray : Product[]) => {
+  try {
+    await AsyncStorage.setItem('productArray', JSON.stringify(productArray));
+    console.log('Cart Saved to Async Storage successfully');
+  }catch(error) {
+    console.error("Error saving cart to AsyncStorage");
+  }
+};
+
+const loadCartFromStorage = async () : Promise<Product[]> => {
+  try {
+    const saveCart = await AsyncStorage.getItem('productArray');
+    return saveCart ? JSON.parse(saveCart) : [];
+  }catch(error){
+    console.error('Error loading cart from AsyncStorage', error);
+    return [];
+  }
+}
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -33,7 +51,7 @@ const cartSlice = createSlice({
         state.productArray.push({ ...newProduct, quantity: 1 });
         console.log('Added new product to cart:', newProduct);
       }
-
+      saveCartToStorage(state.productArray);
       console.log(state.productArray);
     },
     removeFromCart: (state, action: PayloadAction<Product>) => {
@@ -52,16 +70,26 @@ const cartSlice = createSlice({
       } else {
         Alert.alert('Product not found in the cart');
       }
-
+      saveCartToStorage(state.productArray);
       console.log(state.productArray);
     },
 
     clearCart : (state) => {
       state.productArray = [];
+      saveCartToStorage(state.productArray);
+    },
+
+    setCartFromStorage: (state, action: PayloadAction<Product[]>) => {
+      state.productArray = action.payload;
     },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const loadCart = () => async (dispatch: any) => {
+  const savedCart = await loadCartFromStorage();
+  dispatch(setCartFromStorage(savedCart));
+};
+
+export const { addToCart, removeFromCart, clearCart, setCartFromStorage } = cartSlice.actions;
 
 export default cartSlice.reducer;

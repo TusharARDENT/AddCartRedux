@@ -4,8 +4,7 @@ const {width} = Dimensions.get('window')
 
 export default function CheckoutHeader() {
   return (
-     <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '90%', backgroundColor: '#D9EAFD', padding: 20, borderRadius: 5, marginVertical: 10,  color : 'white',
-        backgroundColor : 'black', }}>
+     <View style={styles.header}>
             <Text style={styles.nameStyle}>Name</Text>
             <Text style={styles.priceStyle}>Price($)</Text>
             <Text style={styles.quantityStyle}>Quantity</Text>
@@ -15,12 +14,20 @@ export default function CheckoutHeader() {
 }
 
 const styles = StyleSheet.create({
-
+    header : { flexDirection: "row",
+        justifyContent: 'space-between',
+        width: '90%',
+        padding: 20,
+        // borderRadius: 10,
+        marginVertical: 10,
+        color : '#FEFCF3',
+        backgroundColor : '#D1BB9E',
+    },
     nameStyle: {
         width: width / 2.5,
         fontSize : 16,
         fontWeight : 500,
-        color : 'white',
+        color : '#FEFCF3',
     },
     priceStyle :{
         width : width / 5,

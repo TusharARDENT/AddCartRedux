@@ -19,18 +19,18 @@ const SuccessPage = () => {
     }, [navigation]);
 
   const handleGoBack = () => {
-    navigation.popToTop();
+        navigation.popToTop();
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: 'https://your-url-here.com/your-success-gif.gif' }} // For remote GIF
+        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQktwVyx-qx30ttml_3AqPzIFc66iK9R2XHrA&s' }} // For remote GIF
         style={styles.gif}
         resizeMode="contain"
       />
       <Text style={styles.description}>Your action was completed successfully.</Text>
-      <Button title="Go Back" onPress={handleGoBack} />
+      <Button title="Shop More" onPress={handleGoBack}/>
     </View>
   );
 };
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor : '#FEFCF3',
   },
   successMessage: {
     fontSize: 24,
@@ -54,9 +55,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   gif: {
-    width: 300, // Set width as per the size of the GIF
-    height: 300, // Set height as per the size of the GIF
-    marginBottom: 20, // Space between GIF and text
+    width: 200,
+    height: 200,
+    marginBottom: 20,
   },
 });
 

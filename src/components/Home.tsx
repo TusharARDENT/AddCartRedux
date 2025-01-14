@@ -35,6 +35,7 @@ export default function Home() {
       paddingHorizontal: 6,
       paddingBottom: 20,
       marginTop: 10,
+      backgroundColor: '#FEFCF3',
       }}
     />
   );

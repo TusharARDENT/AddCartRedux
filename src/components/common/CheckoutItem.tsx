@@ -26,7 +26,7 @@ const CheckoutItem: React.FC<CheckoutProps> = (props: { productId: any; name: st
       };
 
     return (
-        <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '90%', backgroundColor: '#D9EAFD', padding: 20, borderRadius: 5, marginVertical: 10 }}>
+        <View style={styles.listItem}>
             <Text style={styles.nameStyle}>{props.name}</Text>
             <Text style={styles.priceStyle}>{props.price}</Text>
             <Text style={styles.quantityStyle}>{props.quantity}</Text>
@@ -39,22 +39,33 @@ const CheckoutItem: React.FC<CheckoutProps> = (props: { productId: any; name: st
 
 const styles = StyleSheet.create({
 
+    listItem : { flexDirection: "row",
+        justifyContent: 'space-between',
+        width: '90%',
+        backgroundColor: '#FFF2E1',
+        padding: 20,
+        // borderRadius: 5,
+},
+
     nameStyle: {
         width: width / 2.5,
         fontSize : 16,
-        fontWeight : 500,
+        fontWeight : 600,
+        color: '#706233' ,
     },
     priceStyle :{
         width : width / 5,
         fontSize : 16,
-        fontWeight : 500,
+        fontWeight : 600,
         textAlign : 'center',
+        color: '#706233' ,
     },
     quantityStyle :{
         width : width / 5,
         fontSize : 16,
-        fontWeight : 500,
+        fontWeight : 600,
         textAlign : 'center',
+        color: '#706233',
     },
 })
 export default CheckoutItem;

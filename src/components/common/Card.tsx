@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = (props: { productId: any; name: string | numbe
       <Image source={{ uri: props.image }} style={styles.image} />
         <Text style={styles.nameText}>{props.name}</Text>
         <Text style={styles.priceText}>
-          Price : {props.price}
+          Price : ${props.price}
         </Text>
       <View style = {{flexDirection : 'row', gap : 10, marginBottom : 5,}}>
         <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
@@ -45,9 +45,10 @@ const styles = StyleSheet.create({
     width: width /2.3,
     margin: 10,
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF2E1',
+    borderWidth : 0.5,
     borderRadius: 10,
-    elevation: 5,
+    elevation: 1,
     alignItems: 'center',
     justifyContent : 'center',
   },
@@ -59,26 +60,26 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  countText: {
-    fontSize: 14,
-    color: '#555',
+    color : '#A79277',
   },
   priceText: {
     fontSize: 12,
     fontWeight: 'bold',
     marginTop: 5,
+    color : '#A79277',
   },
   button: {
     width : 150,
     marginTop: 10,
     borderRadius: 10,
-    padding : 5,
-    backgroundColor: 'powderblue',
+    padding : 10,
+    backgroundColor: '#D1BB9E',
   },
   buttonText: {
     textAlign: 'center',
     fontWeight: 600,
+    fontSize : 16,
+    color : '#FEFCF3',
   }
 });
 
