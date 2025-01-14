@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,22 +20,27 @@ const CheckoutFooter = () => {
         navigation.navigate(SuccessPage)
     };
     return (
-        <><TouchableOpacity onPress={handleClearList}>
-            <Text style={styles.checkoutButton}>Checkout </Text>
-        </TouchableOpacity>
-                <Text style = {styles.total}>
-                    Total :  ${Math.round(totalPrice)}
-                </Text>
-        </>
-    )
+        <View style={{justifyContent:'flex-end', flexDirection:'row'}}>
+            {cartProducts.length > 0 ? (
+                <>
+                    <Text style={styles.total}>
+                            Total: ${Math.round(totalPrice)}
+                    </Text>
+                    <TouchableOpacity onPress={handleClearList}>
+                        <Text style={styles.checkoutButton}>Checkout</Text>
+                    </TouchableOpacity>
+                </>
+        ) : (<></>
+            )}
+        </View>
+    );
 }
 
 
 const styles = StyleSheet.create({
     checkoutButton : {
-        width : width/1.05,
+        width : width/2,
         padding : 20,
-        // borderRadius : 10,
         marginTop : 10,
         fontSize : 24,
         fontWeight : 900,
@@ -44,10 +49,10 @@ const styles = StyleSheet.create({
         textAlign : 'center',
     },
     total : {
-        width : width/1.05,
+        width : width/2,
         padding : 20,
         // borderRadius : 10,
-        marginBottom : 10,
+        marginTop : 10,
         fontSize : 24,
         fontWeight : 900,
         color : '#FEFCF3',

@@ -39,9 +39,10 @@ const CheckoutItem: React.FC<CheckoutProps> = (props: { productId: any; name: st
 
 const styles = StyleSheet.create({
 
-    listItem : { flexDirection: "row",
+    listItem : { 
+        flexDirection: "row",
         justifyContent: 'space-between',
-        width: '90%',
+        width: '100%',
         backgroundColor: '#FFF2E1',
         padding: 20,
         // borderRadius: 5,

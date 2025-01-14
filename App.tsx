@@ -13,7 +13,6 @@ import { RootState } from './src/redux/store';
 import { useSelector } from 'react-redux';
 import SuccessPage from './src/components/SuccessPage';
 import { useEffect } from 'react';
-import { BackHandler } from 'react-native';
 import { loadCart } from './src/redux/slices/cartSlice';
 
 const Stack = createNativeStackNavigator();

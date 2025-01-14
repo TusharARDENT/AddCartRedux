@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 interface Product {
-  productId: string;   
-  name: string; 
-  price: string; 
+  productId: string;
+  name: string;
+  price: string;
   quantity: number;
 }
 
@@ -21,7 +21,7 @@ const saveCartToStorage = async (productArray : Product[]) => {
     await AsyncStorage.setItem('productArray', JSON.stringify(productArray));
     console.log('Cart Saved to Async Storage successfully');
   }catch(error) {
-    console.error("Error saving cart to AsyncStorage");
+    console.error('Error saving cart to AsyncStorage');
   }
 };
 
