@@ -21,7 +21,7 @@ function RootStack() {
   const cartProducts = useSelector((state: RootState) => state.cart.productArray);
   const count = cartProducts.reduce((total, product) => total + product.quantity, 0);
   const totalPrice = cartProducts.reduce((total, product) => total + (product.price * product.quantity), 0);
-  console.log(cartProducts, 'From App', totalPrice);
+  // console.log(cartProducts, 'From App', totalPrice);
   const navigation = useNavigation();
   // eslint-disable-next-line @typescript-eslint/no-shadow
   const dispatch = useDispatch();
@@ -79,7 +79,3 @@ export default function App() {
     </Provider>
   );
 }
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-

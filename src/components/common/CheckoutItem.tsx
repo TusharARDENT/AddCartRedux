@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from 'react'
 import { View, Text, StyleSheet, useWindowDimensions, Dimensions, TouchableOpacity } from 'react-native'
-import { removeFromCart } from '../../redux/slices/cartSlice';
+import { decrementQuantity, DecrementQuantity, incrementQuantity, removeFromCart } from '../../redux/slices/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 const {width} = Dimensions.get('window')
@@ -25,11 +25,24 @@ const CheckoutItem: React.FC<CheckoutProps> = (props: { productId: any; name: st
         dispatch(removeFromCart(product));
       };
 
+      const handleIncrementQuantity = () => {
+        dispatch(incrementQuantity(product));
+      }
+
+      const handleDecrementQuantity = () => {
+        dispatch(decrementQuantity(product));
+      }
     return (
         <View style={styles.listItem}>
             <Text style={styles.nameStyle}>{props.name}</Text>
             <Text style={styles.priceStyle}>{props.price}</Text>
             <Text style={styles.quantityStyle}>{props.quantity}</Text>
+            <TouchableOpacity onPress={handleIncrementQuantity} style={{marginHorizontal:2}}>
+                <Text > + </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleDecrementQuantity} style={{marginHorizontal:5}}>
+                <Text > -</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={handleRemoveFromCart}>
                 <Text  style={{borderRadius : 5, backgroundColor : '#FF748B', padding : 2, fontWeight : 500}}> X </Text>
             </TouchableOpacity>

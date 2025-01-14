@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { increment } from './counterSlice';
 interface Product {
   productId: string;
   name: string;
@@ -61,6 +62,42 @@ const cartSlice = createSlice({
       );
 
       if (existingProduct) {
+
+          const index = state.productArray.indexOf(existingProduct);
+          state.productArray.splice(index, 1);
+
+      } else {
+        Alert.alert('Product not found in the cart');
+      }
+      saveCartToStorage(state.productArray);
+      console.log(state.productArray);
+    },
+
+    clearCart : (state) => {
+      state.productArray = [];
+      saveCartToStorage(state.productArray);
+    },
+
+    incrementQuantity: (state, action: PayloadAction<Product>) => {
+      const productIdToRemove = action.payload.productId;
+      const existingProduct = state.productArray.find(
+        (product) => product.productId === productIdToRemove
+      );
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+        console.log('Decreased quantity or removed product from cart:', action.payload);
+      }
+      saveCartToStorage(state.productArray);
+      console.log(state.productArray);
+    },
+    decrementQuantity: (state, action: PayloadAction<Product>) => {
+      const productIdToRemove = action.payload.productId;
+      const existingProduct = state.productArray.find(
+        (product) => product.productId === productIdToRemove
+      );
+
+      if (existingProduct) {
         existingProduct.quantity -= 1;
         if (existingProduct.quantity === 0) {
           const index = state.productArray.indexOf(existingProduct);
@@ -74,11 +111,6 @@ const cartSlice = createSlice({
       console.log(state.productArray);
     },
 
-    clearCart : (state) => {
-      state.productArray = [];
-      saveCartToStorage(state.productArray);
-    },
-
     setCartFromStorage: (state, action: PayloadAction<Product[]>) => {
       state.productArray = action.payload;
     },
@@ -90,6 +122,6 @@ export const loadCart = () => async (dispatch: any) => {
   dispatch(setCartFromStorage(savedCart));
 };
 
-export const { addToCart, removeFromCart, clearCart, setCartFromStorage } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, setCartFromStorage,incrementQuantity, decrementQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
